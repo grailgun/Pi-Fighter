@@ -10,7 +10,7 @@ namespace Untitled
         public string Testing = "Context";
 
         //GAMEPLAY
-        public ControlManager GameManager;
+        public ControlManager ControlManager;
 
         //GENERAL
         public SceneUI UI;

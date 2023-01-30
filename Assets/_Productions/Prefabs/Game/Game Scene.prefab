@@ -122,7 +122,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ddac0df11750f48a308ef65679e8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionData: {fileID: 0}
+  questionData: {fileID: 11400000, guid: a84fd8259f8526f46af708682f6f594b, type: 2}
+  OnQuestionChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAnswerRight:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAnswerWrong:
+    m_PersistentCalls:
+      m_Calls: []
   triggerRate: 0.4
 --- !u!1 &1527608813
 GameObject:
@@ -250,7 +259,7 @@ MonoBehaviour:
   _selfInitialize: 1
   _context:
     Testing: Context
-    GameManager: {fileID: 318495752}
+    ControlManager: {fileID: 318495752}
     UI: {fileID: 0}
     PlayerCharacter: {fileID: 0}
   _services:

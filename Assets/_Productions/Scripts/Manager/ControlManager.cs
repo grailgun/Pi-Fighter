@@ -1,12 +1,14 @@
+using GameLokal.Toolkit;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Untitled
 {
-    public class ControlManager : SceneService
+    public class ControlManager : SceneService, IEventListener<PadEvent>
     {
         [Title("Questions")]
         [ReadOnly]
@@ -14,11 +16,27 @@ namespace Untitled
         [SerializeField]
         private QuestionData questionData;
 
-        [SerializeField]
-        private float triggerRate = 0.25f;
-        private float triggerRateCounter = 0;
+        //Delegates
+        public UnityEvent<string> OnQuestionChanged;
+        public UnityEvent OnAnswerRight;
+        public UnityEvent OnAnswerWrong;
 
-        public void TriggerPad(PadType type, int number = 0)
+        protected override void OnInitialize()
+        {
+            EventManager.AddListener(this);
+        }
+
+        protected override void OnDeinitialize()
+        {
+            EventManager.RemoveListener(this);
+        }
+
+        protected override void OnActivate()
+        {
+            SetQuestion();
+        }
+
+        private void TriggerPad(PadType type, int number = 0)
         {
             switch (type)
             {
@@ -38,15 +56,37 @@ namespace Untitled
 
         protected virtual void ProcessNumber(int number)
         {
-            if (Time.time < triggerRateCounter + triggerRate) return;
+            StartCoroutine(ProcessAnswer(number));            
+        }
 
-            Debug.Log(number);
+        private IEnumerator ProcessAnswer(int number)
+        {
+            yield return new WaitForSeconds(0.1f);
+            
+            if (number != currentQuestion.answer)
+            {
+                OnAnswerWrong?.Invoke();
+            }
+            else
+            {
+                OnAnswerRight?.Invoke();
+                TriggerAttack(number);
+            }
+        }
 
+        private void TriggerAttack(int number)
+        {
             PlayerAttackEvent.Trigger(number);
 
-            triggerRateCounter = Time.time;
-        }   
-        
+            SetQuestion();
+        }
+
+        private void SetQuestion()
+        {
+            currentQuestion = questionData.GetQuestion();
+            OnQuestionChanged?.Invoke(currentQuestion.question);
+        }
+
         protected virtual void ProcessAccept()
         {
             Debug.Log("Accepted");
@@ -55,6 +95,11 @@ namespace Untitled
         protected virtual void ProcessDecline()
         {
             Debug.Log("Declined");
+        }
+
+        public void OnEvent(PadEvent e)
+        {
+            TriggerPad(e.padType, e.number);
         }
     }
 }

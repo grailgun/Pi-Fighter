@@ -27,7 +27,8 @@ namespace Doozy.Runtime.UIManager
         public enum Gameplay
         {
             Gamepad,
-            PlayerStats
+            PlayerStats,
+            Question
         }    
     }
 }

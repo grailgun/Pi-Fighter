@@ -18,5 +18,7 @@ MonoBehaviour:
       Name: Gamepad
     - Category: Gameplay
       Name: PlayerStats
+    - Category: Gameplay
+      Name: Question
     - Category: None
       Name: None

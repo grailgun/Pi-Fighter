@@ -25,7 +25,8 @@ namespace Untitled
 
         public void TriggerPad()
         {
-            Context.GameManager.TriggerPad(padType, number);
+            //Context.ControlManager.TriggerPad(padType, number);
+            PadEvent.TriggerEvent(padType, number);
         }
 
 #if UNITY_EDITOR

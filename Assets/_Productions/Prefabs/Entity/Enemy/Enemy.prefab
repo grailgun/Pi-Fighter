@@ -251,7 +251,6 @@ GameObject:
   - component: {fileID: 2267781785839595862}
   - component: {fileID: 2267781785839595863}
   - component: {fileID: 2267781785839595880}
-  - component: {fileID: 8691248341088769045}
   - component: {fileID: 5897432483804567685}
   m_Layer: 8
   m_Name: Enemy
@@ -307,12 +306,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5719102750073186641}
   model: {fileID: 4887989232151835736}
+  health: {fileID: 0}
   data: {fileID: 11400000, guid: 98a41c8d27db36e4298698e1bc6a4f7f, type: 2}
   questionData: {fileID: 11400000, guid: a84fd8259f8526f46af708682f6f594b, type: 2}
   OnQuestionChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8691248341088769045}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Untitled.EnemyUI, Untitled
         m_MethodName: SetQuestion
         m_Mode: 0
@@ -325,19 +325,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   hurtBoxType: 0
---- !u!114 &8691248341088769045
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2267781785839595861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f6be09b8ff8aff46aa2774a53e87fb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  questionText: {fileID: 4893552155100334150}
 --- !u!114 &5897432483804567685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,6 +340,9 @@ MonoBehaviour:
   maxHealth: 1
   healthMask: 2
   OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDead:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &2558450628247691457
@@ -373,7 +363,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5453787016871969296
 RectTransform:
   m_ObjectHideFlags: 0

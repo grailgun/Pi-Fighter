@@ -48,15 +48,12 @@ namespace Untitled
 
         public void Hit(int number)
         {
-            if (currentQuestion.answer == number)
-            {
-                LeanPool.Despawn(this);
-            }
+            LeanPool.Despawn(this);
         }
 
         public void OnSpawn()
         {
-            SetQuestion();
+            //SetQuestion();
         }
 
         private void SetQuestion()
